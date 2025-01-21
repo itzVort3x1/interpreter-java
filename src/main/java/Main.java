@@ -29,6 +29,10 @@ public class Main {
     // Uncomment this block to pass the first stage
      if (!fileContents.isEmpty()) {
        Lox.run(fileContents);
+
+       if(Lox.hadError){
+         System.exit(65);
+       }
      } else {
        System.out.println("EOF  null"); // Placeholder, remove this line when implementing the scanner
      }
