@@ -9,13 +9,23 @@ import java.util.List;
 class Lox {
     static boolean hadError = false;
 
-    public static void run(String source){
+    public static void run(String source, String command){
         Scanner scanner = new Scanner(source);
         List<Token> tokens = scanner.scanTokens();
-
-        for(Token token: tokens){
-            System.out.println(token);
+        if(command.equals("parse")){
+            Parser parser = new Parser(tokens);
+            Expr expression = parser.parse();
+            System.out.println(new AstPrinter().print(expression));
         }
+
+        if(command.equals("tokenize")){
+            for(Token token: tokens){
+                System.out.println(token);
+            }
+        }
+
+        if (hadError) return;
+
     }
 
     static void error(int line, String message) {
@@ -25,6 +35,14 @@ class Lox {
     private static void report(int line, String where, String message) {
         System.err.println("[line " + line + "] Error" + where + ": " + message);
         hadError = true;
+    }
+
+    static void error(Token token, String message) {
+        if (token.type == TokenType.EOF) {
+            report(token.line, " at end", message);
+        } else {
+            report(token.line, " at '" + token.lexeme + "'", message);
+        }
     }
 
 }

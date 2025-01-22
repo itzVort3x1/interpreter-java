@@ -13,11 +13,6 @@ public class Main {
     String command = args[0];
     String filename = args[1];
 
-    if (!command.equals("tokenize")) {
-      System.err.println("Unknown command: " + command);
-      System.exit(1);
-    }
-
     String fileContents = "";
     try {
       fileContents = Files.readString(Path.of(filename));
@@ -28,7 +23,7 @@ public class Main {
 
     // Uncomment this block to pass the first stage
      if (!fileContents.isEmpty()) {
-       Lox.run(fileContents);
+       Lox.run(fileContents, command);
 
        if(Lox.hadError){
          System.exit(65);
