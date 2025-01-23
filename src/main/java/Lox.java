@@ -15,6 +15,7 @@ class Lox {
         if(command.equals("parse")){
             Parser parser = new Parser(tokens);
             Expr expression = parser.parse();
+            if (hadError) return;
             System.out.println(new AstPrinter().print(expression));
         }
 
@@ -28,7 +29,7 @@ class Lox {
 
     }
 
-    static void error(int line, String message) {
+    static void error(int line, String message) {;
         report(line, "", message);
     }
 
