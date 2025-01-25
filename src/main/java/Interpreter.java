@@ -108,9 +108,9 @@ class Interpreter implements Expr.Visitor<Object>{
 
         switch (expr.operator.type) {
             case BANG:
-                checkNumberOperand(expr.operator, right);
                 return !isTruthy(right);
             case MINUS:
+                checkNumberOperand(expr.operator, right);
                 return -(double)right;
         }
 
