@@ -28,6 +28,9 @@ public class Main {
        if(Lox.hadError){
          System.exit(65);
        }
+       if(Lox.hadRuntimeError){
+         System.exit(70);
+       }
      } else {
        System.out.println("EOF  null"); // Placeholder, remove this line when implementing the scanner
      }
